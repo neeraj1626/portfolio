@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Neeraj Vishwakarma Portfolio</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- Typed JS -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+<!-- Vanilla Tilt -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#030303;
+    color:white;
+    overflow-x:hidden;
+    font-family:'Poppins',sans-serif;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#ff1744;
+    border-radius:20px;
+}
+
+/* Animated Background */
+
+body::before{
+    content:'';
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:
+    radial-gradient(circle at 20% 20%, rgba(255,0,60,.15), transparent 30%),
+    radial-gradient(circle at 80% 30%, rgba(255,0,60,.12), transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(255,0,60,.08), transparent 30%);
+    z-index:-3;
+    animation:bgMove 12s infinite alternate ease-in-out;
+}
+
+@keyframes bgMove{
+    0%{transform:scale(1);}
+    100%{transform:scale(1.2);}
+}
+
+/* Grid Overlay */
+
+.grid{
+    position:fixed;
+    inset:0;
+    background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size:40px 40px;
+    z-index:-2;
+}
+
+/* Cursor */
+
+.cursor{
+    position:fixed;
+    width:25px;
+    height:25px;
+    border:2px solid #ff1744;
+    border-radius:100%;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:9999;
+    transition:0.1s;
+    box-shadow:0 0 25px #ff1744;
+}
+
+/* Navbar */
+
+nav{
+    width:100%;
+    padding:22px 9%;
+    position:fixed;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+
+    background:rgba(255,255,255,0.03);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.logo{
+    font-family:'Orbitron';
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:#ff1744;
+    /* text-shadow:0 0 20px #ff174591; */
+}
+
+nav ul{
+    display:flex;
+    gap:35px;
+    list-style:none;
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:white;
+    font-size:15px;
+    position:relative;
+    transition:.4s;
+}
+
+nav ul li a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:0%;
+    height:2px;
+    background:#ff1744;
+    transition:.4s;
+    box-shadow:0 0 15px #ff1744;
+}
+
+nav ul li a:hover::after{
+    width:100%;
+}
+
+nav ul li a:hover{
+    color:#ff1744;
+}
+
+/* Hero */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:130px 9% 60px;
+    gap:60px;
+    position:relative;
+}
+
+.hero-left{
+    flex:1;
+}
+
+.hero-left h1{
+    font-family:'Orbitron';
+    font-size:5rem;
+    line-height:1.1;
+    margin-bottom:20px;
+    text-transform:uppercase;
+}
+
+.hero-left h1 span{
+    color:#ff1744;
+    /* text-shadow:
+    0 0 10px hsla(348, 100%, 55%, 0.604),
+    0 0 30px hsla(348, 100%, 55%, 0.604),
+    0 0 60px hsla(348, 100%, 55%, 0.604); */
+}
+
+.typing{
+    font-size:28px;
+    color:#bbb;
+    margin-bottom:25px;
+    height:40px;
+}
+
+.hero-left p{
+    color:#aaa;
+    line-height:1.9;
+    max-width:600px;
+    margin-bottom:35px;
+}
+
+.hero-btns{
+    display:flex;
+    gap:20px;
+}
+
+.btn{
+    padding:16px 35px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:600;
+    position:relative;
+    overflow:hidden;
+    transition:.4s;
+}
+
+.primary{
+    background:#ff1744;
+    color:white;
+    box-shadow:0 0 30px rgba(255,23,68,.5);
+}
+
+.secondary{
+    border:2px solid #ff1744;
+    color:#ff1744;
+}
+
+.btn:hover{
+    transform:translateY(-5px) scale(1.05);
+    box-shadow:0 0 40px #ff1744;
+}
+
+/* Hero Image */
+
+.hero-right{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+.blob{
+    width:500px;
+    height:600px;
+    border-radius:58% 42% 61% 39% / 47% 54% 46% 60%;
+    border:2px solid rgb(69, 3, 3);
+    background:linear-gradient(145deg,#ff174528,#8b001d);
+    position:relative;
+    animation:morph 10s infinite ease-in-out;
+    box-shadow:
+    0 0 60px rgba(255,0,60,.6),
+    0 0 140px rgba(255,0,60,.4);
+}
+
+@keyframes morph{
+    0%{
+        border-radius:58% 42% 61% 39% / 40% 54% 46% 60%;
+    }
+    50%{
+        border-radius:39% 61% 44% 56% / 57% 35% 65% 43%;
+    }
+    100%{
+        border-radius:58% 42% 61% 39% / 40% 54% 46% 60%;
+    }
+}
+
+.blob img{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:inherit;
+    mix-blend-mode:screen;
+}
+
+/* Floating Elements */
+
+.circle{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,23,68,.2);
+    animation:float 6s infinite ease-in-out;
+}
+
+.circle:nth-child(1){
+    width:80px;
+    height:80px;
+    top:10%;
+    left:5%;
+}
+
+.circle:nth-child(2){
+    width:50px;
+    height:50px;
+    bottom:20%;
+    right:10%;
+    animation-delay:2s;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-30px);
+    }
+}
+
+/* Sections */
+
+section{
+    padding:120px 9%;
+}
+
+.section-title{
+    font-family:'Orbitron';
+    font-size:3rem;
+    margin-bottom:60px;
+    text-align:center;
+}
+
+.section-title span{
+    color:#ff1744;
+    /* text-shadow:0 0 20px #ff1744; */
+}
+
+/* Cards */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.05);
+    padding:35px;
+    border-radius:25px;
+    backdrop-filter:blur(20px);
+    transition:.5s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent,rgba(255,23,68,.15),transparent);
+    transform:translateX(-100%);
+    transition:.7s;
+}
+
+.card:hover::before{
+    transform:translateX(100%);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:#ff1744;
+    box-shadow:0 0 35px rgba(255,23,68,.35);
+}
+
+.card i{
+    font-size:40px;
+    color:#ff1744;
+    margin-bottom:20px;
+}
+
+.card h3{
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+.card p{
+    color:#aaa;
+    line-height:1.7;
+}
+
+/* Skills */
+
+/* ========================= */
+/* TECH STACK SECTION */
+/* ========================= */
+
+.tech-stack-section{
+    padding:120px 8%;
+    position:relative;
+}
+
+.tech-header{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.tech-header h2{
+    font-size:4rem;
+    font-family:'Orbitron',sans-serif;
+    font-weight:800;
+    letter-spacing:3px;
+    margin-bottom:20px;
+}
+
+.tech-header h2 span{
+    color:#ff1744;
+    /* text-shadow:
+    0 0 10px #ff1744,
+    0 0 30px #ff1744,
+    0 0 60px #ff1744; */
+}
+
+.tech-header p{
+    max-width:700px;
+    margin:auto;
+    color:#9e9e9e;
+    line-height:1.8;
+    font-size:15px;
+}
+
+/* GRID */
+
+.tech-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:28px;
+}
+
+/* CARD */
+
+.tech-card{
+    height:170px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:28px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:18px;
+
+    position:relative;
+    overflow:hidden;
+
+    backdrop-filter:blur(18px);
+
+    transition:0.5s ease;
+    cursor:pointer;
+}
+
+/* Glow Border */
+
+.tech-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:28px;
+    padding:1px;
+
+    background:linear-gradient(
+        130deg,
+        transparent,
+        rgba(255,23,68,0.8),
+        transparent
+    );
+
+    /* -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0); */
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+
+    opacity:0;
+    transition:0.5s;
+}
+
+/* Hover */
+
+.tech-card:hover{
+    transform:translateY(-12px) scale(1.03);
+    box-shadow:
+    0 0 25px rgba(255,23,68,.25),
+    0 0 60px rgba(255,23,68,.15);
+
+    background:rgba(255,23,68,0.05);
+}
+
+.tech-card:hover::before{
+    opacity:1;
+}
+
+/* ICON */
+
+.tech-card i{
+    font-size:52px;
+    /* color:#ff1744; */
+
+    text-shadow:
+    0 0 10px #ff1744,
+    0 0 25px #ff1744;
+
+    transition:0.5s;
+}
+
+.tech-card:hover i{
+    transform:scale(1.15) rotate(5deg);
+}
+
+/* TEXT */
+
+.tech-card span{
+    font-size:15px;
+    font-weight:500;
+    letter-spacing:1px;
+    color:#ffffff;
+    text-align:center;
+}
+
+/* Animated Background Glow */
+
+.tech-stack-section::before{
+    content:'';
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:radial-gradient(circle, rgba(255,23,68,0.18), transparent 70%);
+    top:10%;
+    left:-10%;
+    z-index:-1;
+    filter:blur(80px);
+}
+
+.tech-stack-section::after{
+    content:'';
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:radial-gradient(circle, rgba(255,23,68,0.15), transparent 70%);
+    bottom:0;
+    right:-10%;
+    z-index:-1;
+    filter:blur(80px);
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .tech-header h2{
+        font-size:2.5rem;
+    }
+
+    .tech-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:18px;
+    }
+
+    .tech-card{
+        height:140px;
+    }
+
+    .tech-card i{
+        font-size:38px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .tech-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+/* Projects */
+
+.project-card img{
+    width:100%;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:20px 0;
+}
+
+.tags span{
+    padding:8px 14px;
+    background:rgba(255,23,68,.12);
+    border:1px solid rgba(255,23,68,.3);
+    border-radius:50px;
+    font-size:13px;
+}
+.project-img{
+    width:100%;
+    height:189px;
+    object-fit:fill;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+/* Contact */
+
+/* ========================= */
+/* CONTACT SECTION */
+/* ========================= */
+
+.contact-box{
+    max-width:950px;
+    margin:auto;
+    padding:50px;
+    border-radius:35px;
+
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+
+    backdrop-filter:blur(18px);
+
+    position:relative;
+    overflow:hidden;
+}
+
+/* Glow Effect */
+
+.contact-box::before{
+    content:'';
+    position:absolute;
+    width:350px;
+    height:350px;
+
+    background:radial-gradient(circle,
+    rgba(255,23,68,.18),
+    transparent 70%);
+
+    top:-120px;
+    right:-120px;
+
+    filter:blur(60px);
+}
+
+/* Grid */
+
+.contact-card{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:28px;
+}
+
+/* Contact Item */
+
+.contact-item{
+    display:flex;
+    align-items:center;
+    gap:22px;
+
+    padding:28px;
+    border-radius:24px;
+
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.05);
+
+    transition:0.5s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Hover */
+
+.contact-item:hover{
+    transform:translateY(-8px) scale(1.02);
+
+    border-color:rgba(255,23,68,.4);
+
+    box-shadow:
+    0 0 25px rgba(255,23,68,.2),
+    0 0 50px rgba(255,23,68,.1);
+}
+
+/* Shine Animation */
+
+.contact-item::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.08),
+        transparent
+    );
+
+    transition:0.8s;
+}
+
+.contact-item:hover::before{
+    left:100%;
+}
+
+/* Icon Box */
+
+.contact-icon{
+    min-width:68px;
+    height:68px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    background:rgba(255,23,68,0.08);
+    border:1px solid rgba(255,23,68,.25);
+}
+
+.contact-icon i{
+    font-size:28px;
+    color:#ff1744;
+
+    text-shadow:
+    0 0 10px #ff1744,
+    0 0 30px #ff1744;
+}
+
+/* Heading */
+
+.contact-info h3{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:18px;
+    margin-bottom:10px;
+    color:#ffffff;
+}
+
+.contact-info h3 i{
+    color:#ff1744;
+    font-size:16px;
+
+    text-shadow:
+    0 0 10px #ff1744,
+    0 0 20px #ff1744;
+}
+
+/* Links */
+
+.contact-info a{
+    color:#bdbdbd;
+    text-decoration:none;
+    font-size:15px;
+
+    transition:0.4s;
+}
+
+.contact-info a:hover{
+    color:#ff1744;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .contact-box{
+        padding:25px;
+    }
+
+    .contact-card{
+        grid-template-columns:1fr;
+    }
+
+    .contact-item{
+        padding:22px;
+    }
+
+}
+/* Footer */
+
+footer{
+    padding:60px 9%;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.05);
+    background:#050505;
+}
+
+.footer-logo{
+    font-size:42px;
+    font-family:'Orbitron';
+    margin-bottom:20px;
+}
+
+.footer-logo span{
+    color:#ff1744;
+}
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin:25px 0;
+}
+
+.socials a{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-decoration:none;
+    color:white;
+    background:rgba(255,255,255,.04);
+    transition:.4s;
+    font-size:20px;
+}
+
+.socials a:hover{
+    background:#ff1744;
+    transform:translateY(-8px);
+    box-shadow:0 0 30px #ff1744;
+}
+
+footer p{
+    color:#777;
+}
+
+/* Responsive */
+
+@media(max-width:1000px){
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-left h1{
+        font-size:3rem;
+    }
+
+    .hero-btns{
+        justify-content:center;
+    }
+
+    .blob{
+        width:350px;
+        height:350px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    nav{
+        padding:20px 5%;
+    }
+
+    nav ul{
+        display:none;
+    }
+
+    .hero{
+        padding:140px 5% 80px;
+    }
+
+    section{
+        padding:90px 5%;
+    }
+
+    .hero-left h1{
+        font-size:2.4rem;
+    }
+
+    .section-title{
+        font-size:2.2rem;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="grid"></div>
+<div class="cursor"></div>
+
+<!-- NAVBAR -->
+
+<nav>
+    <div class="logo">PORT<span>FOLIO</span></div>
+
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tech">Tech Stack</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-left">
+
+        <h1>
+            CODE <span>THE FUTURE</span><br>
+            WITH <span>Neeraj</span><br>
+        </h1>
+
+        <div class="typing">
+            <span id="typed"></span>
+        </div>
+
+        <p>
+            I create modern and immersive digital experiences that combine creativity with technology. I enjoy building interactive interfaces with smooth animations, clean visuals, and user-friendly designs that feel engaging and dynamic. My passion is turning ideas into visually appealing applications that leave a lasting impression on users.
+
+        </p>
+
+        <div class="hero-btns">
+            <a href="#projects" class="btn primary">
+                <!-- <i class="fa-solid fa-rocket"></i> -->
+                View Projects
+            </a>
+
+            <a href="#contact" class="btn secondary">
+                <!-- <i class="fa-solid fa-paper-plane"></i> -->
+                Contact Me
+            </a>
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+
+        <div class="circle"></div>
+        <div class="circle"></div>
+
+        <div class="blob tilt">
+
+            <img src="C:\Users\Dell\Desktop\Portfolio\pppp.jpeg" alt="">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <h2 class="section-title">
+        ABOUT <span>ME</span>
+    </h2>
+
+    <div class="cards">
+
+        <div class="card tilt">
+            <i class="fa-solid fa-user-astronaut"></i>
+            <h3>Who I Am</h3>
+            <p>
+               I’m a passionate software developer who enjoys creating modern applications and exploring new technologies. With experience in Flutter, Firebase, IoT, and full-stack development. I’m especially interested in interactive design, app development, and technology that combines creativity with innovation.
+
+
+            </p>
+        </div>
+
+        <div class="card tilt">
+            <i class="fa-solid fa-brain"></i>
+            <h3>Creative Vision</h3>
+            <p>
+                I love creating digital experiences that feel modern, immersive, and visually engaging. I enjoy combining clean design, smooth animations, and interactive interfaces to make websites and applications feel more alive, intuitive, and memorable for users.
+
+            </p>
+        </div>
+
+        <div class="card tilt">
+            <i class="fa-solid fa-code"></i>
+            <h3>Development</h3>
+            <p>
+                I enjoy building modern and user-friendly web applications that are fast, responsive, and easy to use. My focus is on creating smooth user experiences with clean layouts, interactive elements, and designs that work seamlessly across all devices.
+
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SKILLS -->
+
+<section class="tech-stack-section" id="tech">
+
+    <div class="tech-header">
+        <h2>TECH <span>STACK</span></h2>
+        <p>
+            Technologies and creative tools I use to build futuristic,
+            scalable, and immersive digital experiences.
+        </p>
+    </div>
+
+    <div class="tech-grid">
+
+        <div class="tech-card">
+            <i class="fa-solid fa-mobile-screen flutter"></i>
+            <span>Flutter</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-chart-simple"></i>
+            <span>Power BI</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-file-excel"></i>
+            <span>Excel</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-brands fa-html5"></i>
+            <span>HTML</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-brands fa-react"></i>
+            <span>React</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-brands fa-java"></i>
+            <span>Java</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>J2EE</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-brands fa-python"></i>
+            <span>Python</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-brands fa-css3-alt"></i>
+            <span>CSS</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-brands fa-js"></i>
+            <span>JavaScript</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-flask"></i>
+            <span>Flask</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-fire"></i>
+            <span>Firebase</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-brands fa-figma"></i>
+            <span>Figma</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-pen-nib"></i>
+            <span>Photoshop</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-bezier-curve"></i>
+            <span>Illustrator</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-video"></i>
+            <span>Premiere Pro</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-database"></i>
+            <span>MySQL</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-microchip"></i>
+            <span>Arduino Uno</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-memory"></i>
+            <span>Raspberry Pi 4</span>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-microchip"></i>
+            <span>ESP32</span>
+        </div>
+
+    </div>
+
+</section>
+<!-- PROJECTS -->
+
+<section id="projects">
+
+    <h2 class="section-title">
+        FEATURED <span>PROJECTS</span>
+    </h2>
+
+    <div class="cards">
+
+        <!-- PROJECT 1 -->
+
+        <div class="card project-card tilt">
+
+            <img src="Sarthi%20Logo.jpg" alt="Sarthi Logo" class="project-img">
+
+            <h3>SARTHI – Smart City Traveller</h3>
+
+            <p>
+                A smart travel assistant application designed to improve city
+                travel and safety with nearby attractions, transport guidance,
+                accommodation finder, live maps, and SOS emergency features.
+            </p>
+
+            <div class="tags">
+                <span>Flutter</span>
+                <span>Firebase</span>
+                <span>OpenStreetMap</span>
+                <span>API Integration</span>
+            </div>
+
+            <!-- <div class="hero-btns">
+                <a href="#" class="btn primary">
+                    <i class="fa-solid fa-globe"></i>
+                    Live
+                </a>
+
+                <a href="https://github.com/neeraj1626" target="_blank" class="btn secondary">
+                    <i class="fa-brands fa-github"></i>
+                    GitHub
+                </a>
+            </div> -->
+
+        </div>
+
+        <!-- PROJECT 2 -->
+
+        <div class="card project-card tilt">
+
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="">
+
+            <h3>Smart Water Quality Monitoring Bottle</h3>
+
+            <p>
+                IoT-based smart bottle system that monitors TDS, pH level,
+                and water temperature in real-time using sensors and instantly
+                alerts users about unsafe drinking water conditions.
+            </p>
+
+            <div class="tags">
+                <span>ESP32</span>
+                <span>IoT</span>
+                <span>Blynk</span>
+                <span>Arduino</span>
+            </div>
+
+            <!-- <div class="hero-btns">
+                <a href="#" class="btn primary">
+                    <i class="fa-solid fa-microchip"></i>
+                    Demo
+                </a>
+
+                <a href="https://github.com/neeraj1626" target="_blank" class="btn secondary">
+                    <i class="fa-brands fa-github"></i>
+                    GitHub
+                </a>
+            </div>-->
+
+        </div>
+
+        <!-- PROJECT 3 -->
+
+        <div class="card project-card tilt">
+
+            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&auto=format&fit=crop" alt="">
+
+            <h3>Medicine Refill Tracker</h3>
+
+            <p>
+                A medicine management dashboard that helps users track medicine
+                stock levels, refill schedules, and inventory efficiently with
+                database-driven CRUD operations and responsive UI.
+            </p>
+
+            <div class="tags">
+                <span>Java</span>
+                <span>JSP</span>
+                <span>Servlet</span>
+                <span>MySQL</span>
+            </div>
+
+            <!-- <div class="hero-btns">
+                <a href="#" class="btn primary">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    Preview
+                </a>
+
+                <a href="https://github.com/neeraj1626" target="_blank" class="btn secondary">
+                    <i class="fa-brands fa-github"></i>
+                    GitHub
+                </a>
+            </div> -->
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+    <h2 class="section-title">
+        CONTACT <span>ME</span>
+    </h2>
+
+    <div class="contact-box">
+
+        <div class="contact-card">
+
+            <!-- EMAIL -->
+
+            <div class="contact-item">
+
+                <div class="contact-info">
+
+                    <h3>
+                        <i class="fa-solid fa-envelope"></i>
+                        Email
+                    </h3>
+
+                    <a href="mailto:vishwakarmaneeraj574@gmail.com">
+                        vishwakarmaneeraj574@gmail.com
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- PHONE -->
+
+            <div class="contact-item">
+
+                <div class="contact-info">
+
+                    <h3>
+                        <i class="fa-solid fa-phone"></i>
+                        Phone
+                    </h3>
+
+                    <a href="tel:+919326757536">
+                        +91 9326757536
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- LINKEDIN -->
+
+            <div class="contact-item">
+                <div class="contact-info">
+
+                    <h3>
+                        <i class="fa-brands fa-linkedin-in"></i>
+                        LinkedIn
+                    </h3>
+
+                    <a href="https://www.linkedin.com/in/neeraj1626/" target="_blank">
+                        linkedin.com/in/neeraj1626
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- INSTAGRAM -->
+
+            <div class="contact-item">
+                <div class="contact-info">
+
+                    <h3>
+                        <i class="fa-brands fa-instagram"></i>
+                        Instagram
+                    </h3>
+
+                    <a href="https://www.instagram.com/iam.panther_/" target="_blank">
+                        @iam.panther_
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-logo">
+        Neeraj<span> Vishwakarma</span>
+    </div>
+
+    <p>
+        Creating digital experiences that illuminate the future of the development.
+    </p>
+
+    <div class="socials">
+
+        <a href="https://github.com/neeraj1626"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/iam.panther_/"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/neeraj1626/"><i class="fab fa-linkedin-in"></i></a>
+        
+        <!-- <a href="https://mailto:vishwakarmaneeraj574@gmail.com"><i class="fas fa-envelope"></i></a> -->
+
+    </div>
+
+    <p>
+        © 2026 Neeraj Vishwakarma Portfolio. All rights reserved.
+    </p>
+
+</footer>
+
+<script>
+
+/* Typing */
+
+new Typed("#typed",{
+    strings:[
+        "Frontend Development",
+        "Backend Development",
+        "Mobile Application Development",
+        "UI/UX Designing",
+        "Data Analytics",
+
+    ],
+    typeSpeed:60,
+    backSpeed:40,
+    loop:true
+});
+
+/* Cursor */
+
+const cursor=document.querySelector(".cursor");
+
+document.addEventListener("mousemove",(e)=>{
+    cursor.style.left=e.clientX+"px";
+    cursor.style.top=e.clientY+"px";
+});
+
+/* GSAP Intro */
+
+gsap.from("nav",{
+    y:-100,
+    opacity:0,
+    duration:1
+});
+
+gsap.from(".hero-left h1",{
+    x:-100,
+    opacity:0,
+    duration:1.2
+});
+
+gsap.from(".typing",{
+    x:-80,
+    opacity:0,
+    duration:1.4
+});
+
+gsap.from(".hero-left p",{
+    y:40,
+    opacity:0,
+    duration:1.6
+});
+
+gsap.from(".hero-btns",{
+    y:40,
+    opacity:0,
+    duration:1.8
+});
+
+gsap.from(".blob",{
+    scale:.5,
+    opacity:0,
+    duration:1.8
+});
+
+/* Tilt */
+
+VanillaTilt.init(document.querySelectorAll(".tilt"),{
+    max:12,
+    speed:400,
+    glare:true,
+    "max-glare":0.4
+});
+
+/* Reveal */
+
+const cards=document.querySelectorAll(".card");
+
+window.addEventListener("scroll",()=>{
+
+    cards.forEach(card=>{
+
+        const top=card.getBoundingClientRect().top;
+
+        if(top<window.innerHeight-100){
+
+            card.style.opacity=1;
+            card.style.transform="translateY(0)";
+        }
+
+    });
+
+});
+
+cards.forEach(card=>{
+    card.style.opacity=0;
+    card.style.transform="translateY(60px)";
+    card.style.transition=".8s";
+});
+
+</script>
+
+</body>
+</html>                 
