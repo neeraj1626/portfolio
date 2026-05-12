@@ -312,9 +312,10 @@ body::before{
     position:relative;
 }
 
+/* HERO IMAGE */
+
 .blob{
     width:min(90vw,500px);
-
     aspect-ratio:1/1.15;
 
     border-radius:58% 42% 61% 39% / 47% 54% 46% 60%;
@@ -329,38 +330,49 @@ body::before{
 
     animation:morph 10s infinite ease-in-out;
 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
     box-shadow:
     0 0 60px rgba(255,0,60,.6),
     0 0 140px rgba(255,0,60,.35);
 }
 
-@keyframes morph{
-
-    0%{
-        border-radius:58% 42% 61% 39% / 40% 54% 46% 60%;
-    }
-
-    50%{
-        border-radius:39% 61% 44% 56% / 57% 35% 65% 43%;
-    }
-
-    100%{
-        border-radius:58% 42% 61% 39% / 40% 54% 46% 60%;
-    }
-
-}
-
 .blob img{
-    position:absolute;
-
     width:100%;
     height:100%;
 
-    object-fit:cover;
+    object-fit:contain;
 
     border-radius:inherit;
+
+    padding:10px;
 }
 
+/* MOBILE FIX */
+
+@media(max-width:768px){
+
+    .blob{
+        width:320px;
+        aspect-ratio:1/1;
+    }
+
+}
+
+@media(max-width:480px){
+
+    .blob{
+        width:260px;
+        aspect-ratio:1/1;
+    }
+
+    .blob img{
+        padding:6px;
+    }
+
+}
 /* ========================================= */
 /* FLOATING CIRCLES */
 /* ========================================= */
